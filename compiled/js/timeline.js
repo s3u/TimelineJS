@@ -474,7 +474,13 @@ if(typeof VMM != 'undefined') {
 		}
 		
 	};
-	
+
+    VMM.onSlideChange = function(the_handler) {
+        if( typeof( jQuery ) != 'undefined' ){
+            jQuery(window).bind("CHANGE_SLIDE", the_handler);
+        }
+    }
+
 	VMM.bindEvent = function(element, the_handler, the_event_type, event_data) {
 		var e;
 		var _event_type = "click";
@@ -5437,6 +5443,10 @@ if(typeof VMM != 'undefined' && typeof VMM.Slider == 'undefined') {
 			
 			preloadSlides();
 			VMM.fireEvent($slider, "MESSAGE", "TEST");
+
+            if( typeof( jQuery ) != 'undefined' ){
+                jQuery(window).trigger("CHANGE_SLIDE", n);
+            }
 		}
 
 		function backToCurrentSlide() {
